@@ -1,6 +1,6 @@
 ## Matrix Multiplication Using MapReduce over HDFS
 
-In the following example we will learn to multiply two matrices which are stored over HDFS in the given structure.
+In the following example we will learn to multiply two matrices which are stored over HDFS in the given structure. If you are new to Hadoop please try the [wordcount example](https://github.com/AdityaSinghRathore/WordCountHadoop) first.
 
 ```
 A,0,0,63
@@ -48,11 +48,57 @@ B,4,3,69
 B,4,4,88
 ```
 Where each row in trhe dataset represents
-<Matrix_Name>, &lt;Row&gt;, &lt;Column&gt;
+<Matrix_Name>, &lt;Row&gt;, &lt;Column&gt;, &lt;Value&gt;
 
 1. Data is stored in the file input.txt (given above for download) or simply do.
 ```
 $ touch input.txt
 $ vi input.txt
 ```
-![]()
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/0inputcre.png)
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/01inputin.png)
+
+2. Now Create our Mapper in Python.
+[Code for Mapper](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/mapper.py)
+```
+$ touch mapper.py
+$ vi mapper.py
+```
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/2mapper.png)
+
+3. Now Create our reducer (Code is avaliable in repo. for ***Download*** if it is not visible)
+```
+$ touch reducer.py
+$ vi reducer.py
+```
+[Code for Reducer](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/reducer.py)
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/3reducerpy.png)
+
+4. We try our code by running it locally
+```
+$ cat input.txt | python mapper.py | sort | python reducer.py
+```
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/4localrun.png)
+
+5. Now we start Hadoop Cluster and transfer ***input.txt*** from local to ***HDFS*** storage for that we will create an input directory for matrix multiply example.
+```
+$ ssh localhost
+$ start-dfs.sh
+$ start-yarn.sh
+$ hadoop fs -mkdir /user/aditya/matrix/
+$ hadoop fs -mkdir /user/aditya/matrix/input
+$ hadoop fs -put input.txt /user/aditya/matrix/input
+```
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/5hdcreatedir.png)
+
+6. Now all that is left to do is to use ***mapreduce streaming*** and run our exaple over the input folder.
+```mapred streaming -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py -input /user/aditya/matrixm/input -output /user/aditya/matrixm/output
+```
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/6mapredrun.png)
+
+Your job is now running
+
+7. To see your final output. (ignore matrixm and use matrix directory)
+```hadoop fs -cat /user/aditya/matrix/output/*```
+![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/7finaloutput.png)
+
