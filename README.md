@@ -2,7 +2,7 @@
 
 In the following example we will learn to multiply two matrices which are stored over HDFS in the given structure.
 
-'''
+```
 A,0,0,63
 A,0,1,45
 A,0,2,93
@@ -46,13 +46,13 @@ B,4,1,46
 B,4,2,33
 B,4,3,69
 B,4,4,88
-'''
+```
 Where each row in trhe dataset represents
 <Matrix_Name>, <Row>, <Column>
 
 1. Data is stored in the file input.txt (given above for download) or simply do.
-'''
+```
 $ touch input.txt
 $ vi input.txt
-'''
+```
 ![]()
