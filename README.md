@@ -92,13 +92,17 @@ $ hadoop fs -put input.txt /user/aditya/matrix/input
 ![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/5hdcreatedir.png)
 
 6. Now all that is left to do is to use ***mapreduce streaming*** and run our exaple over the input folder.
-```mapred streaming -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py -input /user/aditya/matrixm/input -output /user/aditya/matrixm/output
+```
+$ mapred streaming -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py -input /user/aditya/matrixm/input -output /user/aditya/matrixm/output
+
 ```
 ![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/6mapredrun.png)
 
 Your job is now running
 
 7. To see your final output. (ignore matrixm and use matrix directory)
-```hadoop fs -cat /user/aditya/matrix/output/*```
+```
+$ hadoop fs -cat /user/aditya/matrix/output/*
+```
 ![](https://github.com/AdityaSinghRathore/MatrixMultiplyMapReduce/blob/master/img/7finaloutput.png)
 
