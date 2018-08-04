@@ -48,7 +48,7 @@ B,4,3,69
 B,4,4,88
 ```
 Where each row in trhe dataset represents
-<Matrix_Name>, <Row>, <Column>
+<Matrix_Name>, &lt;Row&gt;, &lt;Column&gt;
 
 1. Data is stored in the file input.txt (given above for download) or simply do.
 ```
